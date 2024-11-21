@@ -1,101 +1,157 @@
-import Image from "next/image";
-
-export default function Home() {
+import Image from 'next/image';
+import Link from 'next/link';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+export default function HomePage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="overflow-hidden">
+<div className="overflow-hidden">
+  {/* Barre de navigation */}
+  <nav className="bg-cyan-600 p-4 shadow-md fixed w-full top-0 z-10">
+    <div className="container mx-auto flex justify-between items-center">
+      {/* Titre de la barre de navigation */}
+      <div className="text-2xl font-bold">
+        <a href="#home" className="text-white hover:text-gray-200 transition duration-200">
+          Bank Manager
+        </a>
+      </div>
+      
+      {/* Menu de navigation */}
+      <ul className="flex gap-6 text-white">
+        <li>
+          <a href="#accounts" className="text-white hover:text-gray-200 transition duration-200">
+            Comptes
+          </a>
+        </li>
+        <li>
+          <a href="#transactions" className="text-white hover:text-gray-200 transition duration-200">
+            Transactions
+          </a>
+        </li>
+        <li>
+          <a href="#loans" className="text-white hover:text-gray-200 transition duration-200">
+            Prêts
+          </a>
+        </li>
+        <li>
+          <a href="#settings" className="text-white hover:text-gray-200 transition duration-200">
+            Paramètres
+          </a>
+        </li>
+        <li>
+          <a href="#profil" className="text-white hover:text-gray-200 transition duration-200">
+            Profil
+          </a>
+        </li>
+        <li>
+          <a href="#about" className="text-white hover:text-gray-200 transition duration-200">
+            À propos
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+
+      {/* Sections de contenu avec images alignées à droite */}
+      <div className="pt-20 h-screen overflow-hidden">
+          {/* Section Accueil */}
+        <section id="home" className="h-screen flex items-center justify-center bg-gray-100">
+          <div className="flex flex-row-reverse items-center gap-8">
+            <Image src="/bank2.jpg" alt="Accueil" width={400} height={250} className="fade-in" />
+            <div>
+              <h1 className="text-3xl font-bold text-cyan-700">Bienvenue sur Bank Manager</h1>
+              <p className="text-gray-700 mt-4">
+                Votre solution idéale pour la gestion bancaire moderne et sécurisée. Simplifiez vos processus et accédez facilement à toutes vos données financières.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Section Comptes */}
+        <section id="accounts" className="h-screen flex items-center justify-center bg-gray-200">
+          <div className="flex flex-row-reverse items-center gap-8">
+            <Image src="/compte22.jpg" alt="Comptes" width={400} height={250} className="fade-in" />
+            <div>
+              <h2 className="text-2xl font-bold text-cyan-700">Comptes</h2>
+              <p className="text-gray-700 mt-4">
+                Gérez facilement les comptes de vos clients avec des fonctionnalités détaillées comme le solde, les relevés et les mises à jour en temps réel.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Section Transactions */}
+        <section id="transactions" className="h-screen flex items-center justify-center bg-gray-100">
+          <div className="flex flex-row-reverse items-center gap-8">
+            <Image src="/ser1.jpg" alt="Transactions" width={400} height={250} className="fade-in" />
+            <div>
+              <h2 className="text-2xl font-bold text-cyan-700">Transactions</h2>
+              <p className="text-gray-700 mt-4">
+                Visualisez et analysez les transactions en temps réel pour une gestion optimale des flux financiers et une transparence totale.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Section Prêts */}
+        <section id="loans" className="h-screen flex items-center justify-center bg-gray-200">
+          <div className="flex flex-row-reverse items-center gap-8">
+            <Image src="/pret2.jpg" alt="Prêts" width={400} height={250} className="fade-in" />
+            <div>
+              <h2 className="text-2xl font-bold text-cyan-700">Prêts</h2>
+              <p className="text-gray-700 mt-4">
+                Consultez les dossiers de prêts, incluant les taux d'intérêt, les échéances et les remboursements en cours.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Section Paramètres */}
+        <section id="settings" className="h-screen flex items-center justify-center bg-gray-100">
+          <div className="flex flex-row-reverse items-center gap-8">
+            <Image src="/paramcompte.jpg" alt="Paramètres" width={400} height={250} className="fade-in" />
+            <div>
+              <h2 className="text-2xl font-bold text-cyan-700">Paramètres</h2>
+              <p className="text-gray-700 mt-4">
+                Adaptez les réglages de l'application selon vos besoins pour une expérience utilisateur personnalisée.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Section Profil */}
+        <section id="profil" className="h-screen flex items-center justify-center bg-gray-200">
+          <div className="flex flex-row-reverse items-center gap-8">
+            <Image src="/profilo.jpg" alt="Profil" width={400} height={250} className="fade-in" />
+            <div>
+              <h2 className="text-2xl font-bold text-cyan-700">Profil</h2>
+              <p className="text-gray-700 mt-4">
+                Créez un profil sécurisé et accédez à vos informations bancaires de manière confidentielle.
+              </p>
+              <Link href="/demande">
+                <button className="mt-4 px-4 py-2 bg-cyan-600 text-white rounded shadow hover:bg-cyan-700 transition">
+                  Commencer
+                </button>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* Section À propos */}
+        <section id="about" className="h-screen flex items-center justify-center bg-gray-100">
+          <div className="flex flex-row-reverse items-center gap-8">
+            <Image src="/about.jpg" alt="À propos" width={400} height={250} className="fade-in" />
+            <div>
+              <h2 className="text-2xl font-bold text-cyan-700">À propos</h2>
+              <p className="text-gray-700 mt-4">
+                Découvrez notre mission, nos valeurs et notre engagement à fournir des solutions bancaires fiables et performantes.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }
