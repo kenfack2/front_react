@@ -24,7 +24,7 @@ const nextConfig: NextConfig = {
         destination: "http://localhost:8079/SERVICE-NOTIFICATION/api/notification/:path*", // Redirection vers le service notification
       },
       
-      // Requêtes vers le service notification
+      // Requêtes vers le service transaction
       {
         source: "/api/transaction/:path*", // Toutes les requêtes commençant par /api/notification
         destination: "http://localhost:8079/SERVICE-TRANSACTION/api/transaction/:path*", // Redirection vers le service notification

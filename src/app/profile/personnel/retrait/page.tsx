@@ -7,10 +7,10 @@ import { useRouter } from "next/navigation";
 
 export default function RetraitForm() {
   const [formData, setFormData] = useState({
-    telephone: "",
+    telephone: '',
     montant: "",
   });
-
+  
   const router = useRouter(); // Pour gérer les redirections
 
   const handleChange = (e) => {
@@ -18,38 +18,65 @@ export default function RetraitForm() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    // Validation des champs
-    if (!formData.telephone || !formData.montant) {
-      alert("Tous les champs sont requis !");
-      return;
-    }
+  // Validation des champs
+  if (!formData.telephone || !formData.montant) {
+    alert("Tous les champs sont requis !");
+    return;
+  }
 
-    if (parseFloat(formData.montant) <= 0) {
-      alert("Le montant doit être positif !");
-      return;
-    }
+  const montant = parseFloat(formData.montant);
+  if (isNaN(montant) || montant <= 0) {
+    alert("Le montant doit être positif !");
+    return;
+  }
 
-    try {
-      const response = await fetch("/api/transaction/retrait", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
+  try {
+    // Récupération des informations du compte
+    const responseCompte = await fetch(`/api/compte/getCompte/${formData.telephone}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-      if (response.ok) {
-        alert("Retrait effectué avec succès !");
-        router.push("/profile/personnel"); // Redirige vers la page d'accueil
-      } else {
-        const errorData = await response.json();
-        alert(errorData.message || "Erreur lors du retrait !");
+    if (!responseCompte.ok) {
+      if (responseCompte.status === 404) {
+        alert("Compte non trouvé. Veuillez vérifier le numéro de téléphone.");
+        return;
       }
-    } catch (error) {
-      console.error("Erreur réseau:", error);
-      alert("Une erreur s'est produite. Veuillez réessayer.");
+      throw new Error(`Erreur serveur : ${responseCompte.status}`);
     }
-  };
+
+    const accountData = await responseCompte.json();
+
+    // Vérification du solde
+    if (accountData.solde < montant) {
+      alert("Solde insuffisant pour effectuer ce retrait.");
+      return;
+    }
+
+    // Effectuer le retrait
+    const responseRetrait = await fetch("/api/transaction/retrait", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData),
+    });
+
+    if (responseRetrait.ok) {
+      alert("retrait effectuée avec succès !");
+      router.push("/profile/personnel"); // Redirige vers la page d'accueil
+    } else {
+      const errorData = await responseRetrait.json();
+      alert(errorData.message || "Erreur lors du retrait !");
+    }
+  } catch (error) {
+    console.error("Erreur réseau:", error);
+    alert("Une erreur s'est produite. Veuillez réessayer.");
+  }
+};
+ 
 
   return (
     <div className="container mt-5 p-4" style={{

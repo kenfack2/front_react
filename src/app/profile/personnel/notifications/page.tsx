@@ -53,17 +53,19 @@ export default function Notifications() {
       <h2 className="text-center mb-4 text-info">Notifications</h2>
       <div className="list-group">
         {notifications.length > 0 ? (
-          notifications.map((notification) => (
-            <div
-              key={notification.id}
-              className="list-group-item d-flex justify-content-between align-items-center"
-            >
-              <span>{notification.message}</span>
-              <span className="badge bg-secondary">
-                {new Date(notification.date).toLocaleString()}
-              </span>
-            </div>
-          ))
+          [...notifications] // Copie pour ne pas modifier l'état original
+            .reverse()
+            .map((notification) => (
+              <div
+                key={notification.id}
+                className="list-group-item d-flex justify-content-between align-items-center"
+              >
+                <span>{notification.message}</span>
+                <span className="badge bg-secondary">
+                  {new Date(notification.date).toLocaleString()}
+                </span>
+              </div>
+            ))
         ) : (
           <p className="text-center">Aucune notification reçue.</p>
         )}
